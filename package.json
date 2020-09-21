@@ -1,0 +1,25 @@
+{
+  "name": "space",
+  "version": "1.0.0",
+  "description": "Fetch asteroid in space using axios from the NASA api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardbentil/space.git"
+  },
+  "keywords": [
+    "vue",
+    "axios",
+    "bootstrap",
+    "asteroids"
+  ],
+  "author": "Richard Bentil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richardbentil/space/issues"
+  },
+  "homepage": "https://github.com/richardbentil/space#readme"
+}

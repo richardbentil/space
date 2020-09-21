@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="card my-5">
+                <h1 class="card-header">Near-Earth Objects</h1>
+                <div class="m-3" v-cloak v-if="numAsteroids > 0">
+                    <p>Showing {{numAsteroids}} items</p>
+                </div>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Close Approach Date</th>
+                            <th>Miss Distance</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody v-cloak>
+                        <tr v-if="error">
+                            <td>{{error}}</td>
+                        </tr>
+                        <tr v-for="(a, index) in asteroids" :key="a.neo_reference_id" v-if="!error">
+                            <td>{{index + 1}}</td>
+                            <td scope="row">{{ a.name }}</td>
+                            <td>{{ getCloseApproachDate(a) }}</td>
+                            <td>
+                                <ul v-if="a.close_approach_data.length > 0">
+                                    <li v-for="(value, key, index) in a.close_approach_data[0].miss_distance">
+                                        {{key}}: {{value}}
+                                    </li>
+                                </ul>
+                            </td>
+                            <td><button class="btn btn-danger" @click="remove(index)">remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="vue.min.js"></script>
+    <script src="axios.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
