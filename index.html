@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space</title>
     <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        .highlight {
+            border: solid 3px red;
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -13,6 +22,7 @@
                 <h1 class="card-header">Near-Earth Objects</h1>
                 <div class="m-3" v-cloak v-if="numAsteroids > 0">
                     <p>Showing {{numAsteroids}} items</p>
+                    <p>{{closestObject}} has the shortest miss distance </p>
                 </div>
                 <table class="table">
                     <thead class="thead-light">
@@ -28,7 +38,9 @@
                         <tr v-if="error">
                             <td>{{error}}</td>
                         </tr>
-                        <tr v-for="(a, index) in asteroids" :key="a.neo_reference_id" v-if="!error">
+                        <tr v-for="(a, index) in asteroids" :key="a.neo_reference_id" v-if="!error"
+                        :class="{highlight: isMissingData(a), 'shadow-sm': true}"
+                        >
                             <td>{{index + 1}}</td>
                             <td scope="row">{{ a.name }}</td>
                             <td>{{ getCloseApproachDate(a) }}</td>

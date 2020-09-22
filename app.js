@@ -8,6 +8,17 @@ let vm = new Vue({
     computed: {
         numAsteroids: function() {
             return this.asteroids.length;
+        },
+        closestObject: function() {
+            var neosHavingData = this.asteroids.filter(neo => {
+                return neo.close_approach_data.length > 0;
+            });
+            var simpleNeos = neosHavingData.map(neo => {
+                return {name: neo.name, miles: neo.close_approach_data[0].miss_distance.miles}
+            });
+            var sortedNeos = simpleNeos.sort((a, b) => {
+                return sortedNeos[0].name;
+            })
         }
     },
     created: function() {
@@ -35,6 +46,9 @@ let vm = new Vue({
         },
         remove: function(index) {
             this.asteroids.splice(index, 1);
+        },
+        isMissingData: function(a) {
+            return a.close_approach_data.length == 0;
         }
     }
 });
